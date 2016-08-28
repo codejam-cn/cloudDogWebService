@@ -12,8 +12,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="time" Type="datetime" />
           <Property Name="reqStatus" Type="int" />
-          <Property Name="count" Type="nchar" MaxLength="11" />
-          <Property Name="fundTotal" Type="nchar" MaxLength="11" />
+          <Property Name="count" Type="nchar" MaxLength="12" />
+          <Property Name="fundTotal" Type="nchar" MaxLength="12" />
         </EntityType>
         <EntityContainer Name="CloudDogModelStoreContainer">
           <EntitySet Name="Total" EntityType="Self.Total" Schema="dbo" store:Type="Tables" />
@@ -30,8 +30,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="time" Type="DateTime" Precision="3" />
           <Property Name="reqStatus" Type="Int32" />
-          <Property Name="count" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="fundTotal" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="count" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="fundTotal" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityContainer Name="CloudDogEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Totals" EntityType="Self.Total" />
