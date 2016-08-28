@@ -14,6 +14,8 @@ namespace cdws
                 new Cdws() 
             };
             ServiceBase.Run(servicesToRun);
+
+            //Cdws.RunGet();
         }
     }
 }

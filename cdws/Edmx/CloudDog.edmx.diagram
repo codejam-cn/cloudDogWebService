@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ebf2beb77d92491887f0dffa76e545af" Name="Diagram1">
+      <Diagram DiagramId="512cb53e4d1f4873a5651b0cfad921b7" Name="Diagram1">
         <EntityTypeShape EntityType="CloudDogModel.Total" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>

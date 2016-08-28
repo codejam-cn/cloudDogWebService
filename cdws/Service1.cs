@@ -31,6 +31,13 @@ namespace cdws
         }
 
 
+        public static void Test()
+        {
+            Timer timer = new Timer(1000);
+            timer.Elapsed += Get;
+            timer.Start();
+        }
+
         public static void Get(object sender, ElapsedEventArgs e)
         {
             int second = e.SignalTime.Second;
@@ -47,6 +54,8 @@ namespace cdws
             const string url = "http://api.1yyg.com/JPData?action=totalBuyCount";
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
+            //var aaa = request.GetResponse();
+
             try
             {
                 var response = (HttpWebResponse)request.GetResponse();
