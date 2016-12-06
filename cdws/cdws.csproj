@@ -57,24 +57,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Edmx\CloudDog.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CloudDog.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Edmx\CloudDog.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CloudDog.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Edmx\CloudDog.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CloudDog.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Edmx\Total.cs">
-      <DependentUpon>CloudDog.tt</DependentUpon>
-    </Compile>
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -93,23 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="Edmx\CloudDog.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CloudDog.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Edmx\CloudDog.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CloudDog.edmx</DependentUpon>
-      <LastGenOutput>CloudDog.Context.cs</LastGenOutput>
-    </None>
-    <None Include="Edmx\CloudDog.edmx.diagram">
-      <DependentUpon>CloudDog.edmx</DependentUpon>
-    </None>
-    <None Include="Edmx\CloudDog.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CloudDog.edmx</DependentUpon>
-      <LastGenOutput>CloudDog.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -122,10 +87,6 @@
     <EmbeddedResource Include="Service1.resx">
       <DependentUpon>Service1.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Edmx\CloudDog.edmx.sql" />
-    <Content Include="Note\note log.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

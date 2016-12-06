@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.ServiceProcess;
 using System.Timers;
-using cdws.Edmx;
+using cdws.Service;
 using Newtonsoft.Json;
 
 namespace cdws
@@ -12,9 +12,9 @@ namespace cdws
     {
         internal class Json
         {
-            public int state { get; set; }
-            public string count { get; set; }
-            public string fundTotal { get; set; }
+            public int State { get; set; }
+            public long Count { get; set; }
+            public long FundTotal { get; set; }
         }
 
 
@@ -72,12 +72,14 @@ namespace cdws
 
                 Json result = (Json)JsonConvert.DeserializeObject(replace3, typeof(Json));
 
-                Total total = new Total
+                CdwsItem total = new CdwsItem
                 {
-                    count = result.count,
-                    fundTotal = result.fundTotal,
-                    reqStatus = (int?) response.StatusCode,
-                    time = DateTime.Now
+                   
+
+                    Count = result.Count,
+                    FoundTotal = result.FundTotal,
+                    ReqStatus = (int) response.StatusCode,
+                    Time = DateTime.Now
                 };
 
                 Service.Add.AddNewItem(total);

@@ -1,30 +1,45 @@
 ﻿using System;
-using cdws.Edmx;
+using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace cdws.Service
 {
+    public class CdwsItem
+    {
+        public long Count { get; set; }
+        public long FoundTotal { get; set; }
+        public DateTime Time { get; set; }
+        public int ReqStatus { get; set; }
+    }
+
+    public class CdwsContext : DbContext
+    {
+        public CdwsContext(): base("name=DefaultConnection")
+        {
+            
+        }
+
+        public virtual List<CdwsItem> Cdwses { get; set; }
+    }
+
+
     internal class Add
     {
 
-        public static void AddNewItem(Total item)
+        public static void AddNewItem(CdwsItem item)
         {
             try
             {
-                using (CloudDogEntities context = new CloudDogEntities())
+                using (var context = new CdwsContext())
                 {
-
-                    var total = new Total
+                    var total = new CdwsItem
                     {
-                        count = item.count,
-                        fundTotal = item.fundTotal,
-                        time = item.time,
-                        reqStatus = item.reqStatus
+                        Count = item.Count,
+                        FoundTotal = item.FoundTotal,
+                        Time = item.Time,
+                        ReqStatus = item.ReqStatus
                     };
-
-
-
-                    context.Totals.Add(total);
-
+                    context.Cdwses.Add(item);
                     context.SaveChanges();
                 }
             }
