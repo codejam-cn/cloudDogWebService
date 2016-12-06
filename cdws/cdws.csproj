@@ -124,6 +124,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Edmx\CloudDog.edmx.sql" />
     <Content Include="Note\note log.txt" />
   </ItemGroup>
   <ItemGroup />
