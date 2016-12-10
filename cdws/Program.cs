@@ -9,13 +9,13 @@ namespace cdws
         /// </summary>
         public static void Main()
         {
-            var servicesToRun = new ServiceBase[] 
-            { 
-                new Cdws() 
-            };
-            ServiceBase.Run(servicesToRun);
+            //var servicesToRun = new ServiceBase[] 
+            //{ 
+            //    new Cdws() 
+            //};
+            //ServiceBase.Run(servicesToRun);
 
-            //Cdws.RunGet();
+            Cdws.RunGet();
         }
     }
 }

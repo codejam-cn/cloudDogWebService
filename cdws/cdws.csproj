@@ -72,6 +72,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Add.cs" />
+    <Compile Include="Service\CdwsContext.cs" />
+    <Compile Include="Service\CdwsItem.cs" />
+    <Compile Include="Service\ExceptionLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

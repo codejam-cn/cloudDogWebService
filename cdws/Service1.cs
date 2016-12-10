@@ -4,20 +4,12 @@ using System.Net;
 using System.ServiceProcess;
 using System.Timers;
 using cdws.Service;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace cdws
 {
     public partial class Cdws : ServiceBase
     {
-        internal class Json
-        {
-            public int State { get; set; }
-            public long Count { get; set; }
-            public long FundTotal { get; set; }
-        }
-
-
         public Cdws()
         {
             InitializeComponent();
@@ -25,71 +17,70 @@ namespace cdws
 
         protected override void OnStart(string[] args)
         {
-            Timer timer = new Timer(1000);
+            var timer = new Timer(1000);
             timer.Elapsed += Get;
             timer.Start();
         }
 
-
-        public static void Test()
-        {
-            Timer timer = new Timer(1000);
-            timer.Elapsed += Get;
-            timer.Start();
-        }
 
         public static void Get(object sender, ElapsedEventArgs e)
         {
-            int second = e.SignalTime.Second;
-            if (second % 60 == 0)
+            var second = e.SignalTime.Second;
+            if (second%60 == 0)
             {
                 RunGet();
             }
         }
 
 
-
         public static void RunGet()
         {
             const string url = "http://api.1yyg.com/JPData?action=totalBuyCount";
-            var request = (HttpWebRequest)WebRequest.Create(url);
+            var request = (HttpWebRequest) WebRequest.Create(url);
             request.Method = "GET";
-            //var aaa = request.GetResponse();
-
             try
             {
-                var response = (HttpWebResponse)request.GetResponse();
+                var response = (HttpWebResponse) request.GetResponse();
                 var stream = response.GetResponseStream();
 
-                string content;
-                using (var sr = new StreamReader(stream))
+                var content = "";
+                if (stream != null)
                 {
-                    content = sr.ReadToEnd();
+                    using (var sr = new StreamReader(stream))
+                    {
+                        content = sr.ReadToEnd();
+                    }
                 }
                 var replace = content.Replace("\'", "\"");
                 var replace2 = replace.Replace("(", "");
                 var replace3 = replace2.Replace(")", "");
 
-                Json result = (Json)JsonConvert.DeserializeObject(replace3, typeof(Json));
+                var jsonObj = JObject.Parse(replace3);
+                var state = int.Parse(jsonObj["state"].ToString());
+                var count = decimal.Parse(jsonObj["count"].ToString());
+                var fundTotal = decimal.Parse(jsonObj["fundTotal"].ToString());
 
-                CdwsItem total = new CdwsItem
+                var item = new CdwsItem
                 {
-                   
-
-                    Count = result.Count,
-                    FoundTotal = result.FundTotal,
-                    ReqStatus = (int) response.StatusCode,
+                    ItemId = Guid.NewGuid(),
+                    Count = count,
+                    FoundTotal = fundTotal,
+                    ReqStatus = state,
                     Time = DateTime.Now
                 };
-
-                Service.Add.AddNewItem(total);
-
-
+                Add.AddNewItem(item);
             }
             catch (WebException e)
             {
-                var status = ((HttpWebResponse)e.Response).StatusCode;
-
+                if (e.InnerException != null)
+                {
+                    var exp = new ExceptionLog
+                    {
+                        ExceptionGuid = Guid.NewGuid(),
+                        ExceptionDetails = e.InnerException != null ? string.Empty : e.InnerException.ToString()
+                    };
+                    Add.AddExceptionLog(exp);
+                }
             }
         }
 
